@@ -343,4 +343,8 @@ Deploy the frontend application using the todo-frontend image stream from the yo
 > oc new-app --as-deployment-config --name frontend -e BACKEND_HOST=api.example.com -i ${RHT_OCP4_DEV_USER}-review-common/todo-frontend
 
 --------------------------------------------------------------------------
+Use the oc process command to list the parameters already defined in the template
+oc process --parameters -f ~/todoapp.yaml
+---------------------------------------------------------------------------
+
 
