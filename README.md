@@ -31,7 +31,7 @@ oc start-build ${APP_NAME}
 
 
 ------------------------------------------------------------------
-oc get templates -n oepnshift  (can be user with | grep ${name})
+oc get templates -n oepnshift  (can be used with | grep ${name})
 
 -----------------------------------------------------------------------
 oc rsh ${POD} bash -c - inicia um bash em um pod
@@ -334,3 +334,13 @@ Use the oc set triggers command to set a deployment trigger for a deployment con
 > oc set triggers dc/name --from-image=myproject/origin-ruby-sample:latest -c helloworld
 
 ---------------------------------------------------------------------
+
+Grant service accounts from the new youruser-review-dockerfile project access to image streams from the youruser-review-common project.
+> oc policy add-role-to-group -n ${RHT_OCP4_DEV_USER}-review-common system:image-puller system:serviceaccounts:${RHT_OCP4_DEV_USER}-review-dockerfile
+
+------------------------------------------------------------------------
+Deploy the frontend application using the todo-frontend image stream from the youruser-review-common project. Set the environment variable BACKEND_HOST to api.example.com
+> oc new-app --as-deployment-config --name frontend -e BACKEND_HOST=api.example.com -i ${RHT_OCP4_DEV_USER}-review-common/todo-frontend
+
+--------------------------------------------------------------------------
+
